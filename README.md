@@ -54,4 +54,4 @@ npm test
 
 Os testes usam o runner nativo do Node.js e cobrem a resposta da API, arquivos estáticos, métodos HTTP, campos obrigatórios, opções e formatos de contato.
 
-A interface utiliza HTML, CSS e JavaScript nativos. Os grupos do formulário são gerados a partir do JSON; campos `enumerable` são selects. Erros aparecem ao sair do campo e ao concluir o pedido, com foco no primeiro campo inválido. Falhas no carregamento oferecem uma nova tentativa. A conclusão apenas valida os dados localmente, sem POST ou armazenamento.
+A interface utiliza HTML, CSS e JavaScript nativos. As perguntas do formulário são geradas a partir dos dois grupos do JSON e apresentadas uma por etapa, com progresso e botão Voltar; campos `enumerable` são selects. Erros aparecem ao sair do campo e ao concluir o pedido, com foco no campo inválido e preservação das respostas ao voltar. Falhas no carregamento oferecem uma nova tentativa. A conclusão apenas valida os dados localmente, sem POST ou armazenamento.

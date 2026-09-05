@@ -21,6 +21,12 @@ test('API entrega o JSON original e serve os arquivos da interface', async (t) =
     assert.ok(asset.headers.get('content-type').includes(type));
     assert.ok((await asset.text()).length > 0);
   }
+  for (const [path, type] of [['/assets/logo.svg', 'image/svg+xml'], ['/assets/cabeleireiro.png', 'image/png']]) {
+    const asset = await fetch(`${base}${path}`);
+    assert.equal(asset.status, 200);
+    assert.ok(asset.headers.get('content-type').includes(type));
+    assert.ok((await asset.arrayBuffer()).byteLength > 0);
+  }
   assert.equal((await fetch(`${base}/missing`)).status, 404);
   const post = await fetch(`${base}/api/fields`, { method: 'POST' });
   assert.equal(post.status, 405);
