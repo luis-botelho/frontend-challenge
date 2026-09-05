@@ -37,3 +37,21 @@ O formulário a ser renderizado é o de pedidos, da forma que é exibido [aqui](
 - O formulário não precisa fazer `POST`;
 - Temos uma cultura de testes unitários e de integração. Uma dessas formas, pelo menos, é essencial pra esse teste;
 - Se quiser, faça uma rota no Node.js pra exibir o formulário num HTML.
+
+# Executando a solução
+
+Requer Node.js 22 ou superior. Não há dependências externas.
+
+```sh
+npm start
+```
+
+Acesse http://localhost:3000. A API está em `/api/fields`. Para mudar a porta, execute `PORT=3001 npm start`.
+
+```sh
+npm test
+```
+
+Os testes usam o runner nativo do Node.js e cobrem a resposta da API, arquivos estáticos, métodos HTTP, campos obrigatórios, opções e formatos de contato.
+
+A interface utiliza HTML, CSS e JavaScript nativos. Os grupos do formulário são gerados a partir do JSON; campos `enumerable` são selects. Erros aparecem ao sair do campo e ao concluir o pedido, com foco no primeiro campo inválido. Falhas no carregamento oferecem uma nova tentativa. A conclusão apenas valida os dados localmente, sem POST ou armazenamento.
