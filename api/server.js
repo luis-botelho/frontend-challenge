@@ -8,6 +8,8 @@ export function createApp() {
     ['/style.css', ['../web/style.css', 'text/css']],
     ['/script.js', ['../web/script.js', 'application/javascript']],
     ['/form.js', ['../web/form.js', 'application/javascript']],
+    ['/assets/logo.svg', ['../web/assets/logo.svg', 'image/svg+xml']],
+    ['/assets/cabeleireiro.png', ['../web/assets/cabeleireiro.png', 'image/png']],
     ['/api/fields', ['../fields.json', 'application/json']],
   ]);
 

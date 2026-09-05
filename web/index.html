@@ -5,30 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/style.css">
   <script type="module" src="/script.js"></script>
-  <title>Cabeleireiros | Pedido de serviço</title>
+  <title>Cabeleireiros | GetNinjas</title>
 </head>
 <body>
-  <header><a class="brand" href="/">Get<span>Ninjas</span></a><span>Encontre o profissional certo</span></header>
+  <header class="header">
+    <a href="/" aria-label="GetNinjas, início"><img src="/assets/logo.svg" alt="GetNinjas" width="150" height="33"></a>
+    <nav aria-label="Navegação principal"><a href="https://www.getninjas.com.br/anuncie">Seja um profissional</a><a href="#como-funciona">Como funciona?</a><a href="#privacidade">Segurança</a></nav>
+  </header>
   <main>
-    <section class="intro" aria-labelledby="title">
-      <p class="eyebrow">MODA E BELEZA / CABELEIREIROS</p>
-      <h1 id="title">Seu próximo visual começa aqui.</h1>
-      <p>Conte o que você precisa para encontrar um cabeleireiro para o seu serviço.</p>
-      <ol><li>Descreva o serviço</li><li>Preencha seus dados</li><li>Confira seu pedido</li></ol>
-      <p class="demo">Exercício de frontend · Nenhum dado será enviado.</p>
+    <section class="hero" aria-labelledby="title">
+      <p class="breadcrumb">GetNinjas › Moda e Beleza › Cabeleireiros</p>
+      <div class="hero-copy">
+        <h1 id="title">Precisando de Cabeleireiros?</h1>
+        <p>Encontre profissionais para cuidar do seu cabelo. Conte o que você precisa e dê o primeiro passo para o seu novo visual.</p>
+        <ul class="benefits"><li><span aria-hidden="true">✓</span> Seu pedido em poucos passos</li><li><span class="star" aria-hidden="true">★</span> O serviço do seu jeito</li></ul>
+        <a class="how-link" href="#como-funciona"><span aria-hidden="true">▶</span> Como funciona o GetNinjas?</a>
+      </div>
+      <img class="professional" src="/assets/cabeleireiro.png" alt="Profissional cabeleireiro" width="270" height="360">
     </section>
-    <section class="card" aria-labelledby="form-title">
-      <h2 id="form-title">Qual serviço de Cabeleireiros está precisando?</h2>
-      <p class="hint">Preencha os campos abaixo. * Campos obrigatórios.</p>
-      <form id="form" novalidate>
-        <div id="groups"></div>
-        <p id="status" role="status" aria-live="polite"></p>
-        <button id="retry" type="button" hidden>Tentar novamente</button>
-        <button id="submit" type="submit" disabled>Concluir pedido <span aria-hidden="true">→</span></button>
-      </form>
-      <noscript>Ative o JavaScript para carregar o formulário.</noscript>
-    </section>
+    <div class="request-area">
+      <section class="form-panel" aria-labelledby="form-title">
+        <div class="card">
+          <h2 id="form-title">Qual serviço de Cabeleireiros está precisando?</h2>
+          <form id="form" novalidate>
+            <p id="step-label" class="step-label"></p>
+            <progress id="progress" value="0" max="9" aria-label="Progresso do pedido"></progress>
+            <div id="groups"></div>
+            <p id="status" role="status" aria-live="polite"></p>
+            <button id="retry" type="button" hidden>Tentar novamente</button>
+            <div class="actions"><button id="back" class="secondary" type="button" hidden>Voltar</button><button id="submit" type="submit" disabled>Continuar <span aria-hidden="true">→</span></button></div>
+          </form>
+          <noscript>Ative o JavaScript para carregar o formulário.</noscript>
+        </div>
+        <p class="panel-caption"><span aria-hidden="true">◷</span> É rápido e fácil preencher seu pedido</p>
+      </section>
+      <aside id="como-funciona" class="sidebar">
+        <div class="summary"><span class="stars" aria-hidden="true">★★★★★</span><h2>Seu serviço começa aqui</h2><p>Descreva o que precisa em poucos passos.</p></div>
+        <h2>Como funciona?</h2>
+        <ol class="steps"><li><strong>Conte o que você precisa</strong><p>Escolha o serviço, para quem será e quando você precisa.</p></li><li><strong>Preencha seus dados</strong><p>Informe seu nome, CEP e dados de contato.</p></li><li><strong>Confira e conclua</strong><p>Você pode voltar para revisar suas respostas antes de terminar.</p></li></ol>
+        <p id="privacidade" class="privacy">Demonstração do formulário: os dados ficam apenas nesta página e não são enviados ou armazenados.</p>
+      </aside>
+    </div>
   </main>
-  <footer>Desafio frontend · Formulário de pedidos</footer>
+  <footer><img src="/assets/logo.svg" alt="GetNinjas" width="130" height="29"><p>Moda e Beleza · Cabeleireiros</p></footer>
 </body>
 </html>
