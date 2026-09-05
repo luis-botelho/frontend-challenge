@@ -1,33 +1,42 @@
-import fs from 'fs';
-import http from 'http';
+import { readFileSync } from 'node:fs';
+import { createServer } from 'node:http';
+import { pathToFileURL } from 'node:url';
 
-const data = fs.readFileSync('./fields.json', 'utf8');
-const home = fs.readFileSync('./web/index.html', 'utf8');
-const css = fs.readFileSync('./web/style.css', 'utf8');
-const js = fs.readFileSync('./web/script.js', 'utf8');  
+export function createApp() {
+  const routes = new Map([
+    ['/', ['../web/index.html', 'text/html']],
+    ['/style.css', ['../web/style.css', 'text/css']],
+    ['/script.js', ['../web/script.js', 'application/javascript']],
+    ['/form.js', ['../web/form.js', 'application/javascript']],
+    ['/api/fields', ['../fields.json', 'application/json']],
+  ]);
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(home);
+  return createServer((req, res) => {
+    if (!['GET', 'HEAD'].includes(req.method)) {
+      res.writeHead(405, { Allow: 'GET, HEAD' });
+      return res.end();
+    }
 
-  } else if (req.url === '/style.css') {
-    res.writeHead(200, { 'Content-Type': 'text/css' });
-    res.end(css);
+    const route = routes.get(new URL(req.url, 'http://localhost').pathname);
+    if (!route) {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      return res.end(req.method === 'HEAD' ? undefined : 'Página não encontrada');
+    }
 
-  } else if (req.url === '/script.js') {
-    res.writeHead(200, { 'Content-Type': 'application/javascript' });
-    res.end(js);
+    try {
+      const body = readFileSync(new URL(route[0], import.meta.url));
+      res.writeHead(200, {
+        'Content-Type': `${route[1]}; charset=utf-8`,
+        'X-Content-Type-Options': 'nosniff',
+      });
+      res.end(req.method === 'HEAD' ? undefined : body);
+    } catch {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(req.method === 'HEAD' ? undefined : 'Não foi possível carregar o recurso');
+    }
+  });
+}
 
-  } else if (req.url === '/api/fields') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(data);
-
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Not found');
-  }
-});
-
-
-server.listen(3000);
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  createApp().listen(process.env.PORT || 3000);
+}
